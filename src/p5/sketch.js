@@ -1,14 +1,14 @@
-var earthquakes;
+let solarEclipseData, lunarPhaseData, asteroidsData;
 
 function preload() {
   solarData = getSolarEclipses().then(function(solarRes) {
-    console.log(solarRes);
+    solarEclipseData = solarRes;
   });
-  phaseData = getLunarPhases().then(function(phaseRes) {
-    console.log(phaseRes);
+  lunarPhaseData = getLunarPhases().then(function(phaseRes) {
+    phaseData = phaseRes;
   });
   asteroidsData = getAsteroids().then(function(astRes) {
-    console.log(astRes);
+    asteroidsData = astRes;
   });
 }
 
@@ -19,10 +19,8 @@ function setup() {
 
 function draw() {
   background(200);
-  // Get the magnitude and name of the earthquake out of the loaded JSON
-  let earthquakeMag = earthquakes.features[0].properties.mag;
-  let earthquakeName = earthquakes.features[0].properties.place;
-  ellipse(width / 2, height / 2, earthquakeMag * 10, earthquakeMag * 10);
-  textAlign(CENTER);
-  text(earthquakeName, 0, height - 30, width, 30);
+  drawSolarEclipse(solarEclipseData);
+  drawLunarPhase(lunarPhaseData);
+  drawAsteroids(asteroidsData);
+
 }
