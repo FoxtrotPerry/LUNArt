@@ -1,12 +1,12 @@
 function getSolarEclipses() {
     const year = new Date().getFullYear();
 
-    return new Promise((resolve, reject) => {
+    return new Promise(function(resolve, reject) {
         axios(`http://api.usno.navy.mil/eclipses/solar?year=${year}`).then(res => {
-            if (!res.error) {
-                resolve(res.eclipses_in_year);
+            if (!res.data.error) {
+                resolve(res.data.eclipses_in_year);
             } else {
-                reject(res.error)
+                reject(res.data.error)
             }
         });
     })
