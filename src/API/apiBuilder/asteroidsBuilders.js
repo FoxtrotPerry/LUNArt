@@ -1,8 +1,15 @@
 export const getAsteroids = () => {
-    axios(`https://api.nasa.gov/neo/rest/v1/feed?start_date=START_DATEAPI_KEY&end_date=END_DATE&api_key=`).then(res => { // need API key
+    const api_key = 'MBvsTy9XnAwrzZkSG4HuH3tzLkYOBJX5LN9kNcPM';
+    const currentYear = new Date().getFullYear();
+    const start_date = currentYear+'-01-01';
+    const end_date = currentYear+'-12-31';
+
+    axios('https://api.nasa.gov/neo/rest/v1/feed', {
+        params: {api_key, start_date, end_date}
+    }).then(res => {
         return res;
     })
-    .catch(e => {
+      .catch(e => {
 
     });
 }
