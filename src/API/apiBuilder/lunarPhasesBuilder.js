@@ -1,12 +1,14 @@
-export const getLunarPhases = () => {
-    const year = new Date().getFullYear();
-    return new Promise(resolve, reject, () => {
-        axios(`/sunmoon/moonphases/minneapolis,mn?from=${year}-01-01&to=${year}-12-31&limit=100`).then(res => {
+function getLunarPhases() {
+    const currentYear = new Date().getFullYear();
+    const currentDay = new Date().getDay();
+    const currentMonth = new Date().getMonth();
+    const date = currentMonth + '/' + currentDay + '/' + currentYear;
+    return new Promise(function(resolve, reject) {
+        axios(`http://api.usno.navy.mil/moon/phase?date=${date}&nump=1`).then(res => {
             if (res.data.success) {
                 resolve(res.data.response);
-            } else {
-                reject();
             }
-        });
+        })
+        .catch(e => reject(e));
     })
 }

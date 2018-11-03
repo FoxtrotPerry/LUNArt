@@ -1,10 +1,15 @@
 var earthquakes;
+
 function preload() {
-  // Get the most recent earthquake in the database
-  var url =
-   'https://earthquake.usgs.gov/earthquakes/feed/v1.0/' +
-    'summary/all_day.geojson';
-  earthquakes = loadJSON(url);
+  solarData = getSolarEclipses().then(function(solarRes) {
+    console.log(solarRes);
+  });
+  phaseData = getLunarPhases().then(function(phaseRes) {
+    console.log(phaseRes);
+  });
+  asteroidsData = getAsteroids().then(function(astRes) {
+    console.log(astRes);
+  });
 }
 
 function setup() {
