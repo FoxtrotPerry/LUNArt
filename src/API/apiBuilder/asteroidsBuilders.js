@@ -11,7 +11,7 @@ function getAsteroids() {
         axios('https://api.nasa.gov/neo/rest/v1/feed', {
             params: {api_key, start_date, end_date}
         }).then(res => {
-            return res.data;
+            resolve(res.data);
         })
           .catch(e => {
             reject(e);

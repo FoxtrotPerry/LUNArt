@@ -4,9 +4,8 @@ function getSolarEclipses() {
         axios(`http://api.usno.navy.mil/eclipses/solar?year=${year}`).then(res => {
             if (!res.data.error) {
                 resolve(res.data.eclipses_in_year);
-            } else {
-                reject(res.data.error);
             }
-        });
+        })
+        .catch(e => reject(e));
     })
 }
