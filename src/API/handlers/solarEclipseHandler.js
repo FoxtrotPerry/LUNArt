@@ -1,0 +1,1 @@
+getSolarEclipses().then(e => console.log(e))
