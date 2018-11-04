@@ -40,5 +40,8 @@ function keyTyped() {
       daysUntilEclipse = calculateDaysUntilEclipse(solarEclipseData);
     })();
     break;
+
+    case '3': testingTide = !testingTide;
+    break;
   }
 }
