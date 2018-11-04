@@ -22,8 +22,8 @@ function setup() {
 function draw() {
   tick++;
   background(0, 5, 60);
-  drawLunarPhase(lunarPhaseData);
   drawSolarEclipse(solarEclipseData);
+  drawLunarPhase(lunarPhaseData);
   drawAsteroids(asteroidsData);
   updateData();
 }
