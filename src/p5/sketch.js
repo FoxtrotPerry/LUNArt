@@ -18,8 +18,8 @@ function setup() {
 
 function draw() {
   background(200);
+  ellipse(56, 46, 55, 55);
   drawSolarEclipse(solarEclipseData);
   drawLunarPhase(lunarPhaseData);
   drawAsteroids(asteroidsData);
-
 }
