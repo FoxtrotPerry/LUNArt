@@ -17,9 +17,12 @@ function setup() {
 }
 
 function draw() {
-  background(200);
-  ellipse(56, 46, 55, 55);
+  background(0,5,60);
   drawSolarEclipse(solarEclipseData);
   drawLunarPhase(lunarPhaseData);
   drawAsteroids(asteroidsData);
+  phaseMod += .001;
+  if(phaseMod>=1.0){
+    phaseMod=0;
+  }
 }
