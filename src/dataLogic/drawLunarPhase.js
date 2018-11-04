@@ -2,6 +2,7 @@ let phaseMod = 0;
 let eD = 0;
 let tD = 0;
 let dOver = 0;
+var ratio = 0;
 
 function drawLunarPhase(data) {
     if(data) {
@@ -11,30 +12,60 @@ function drawLunarPhase(data) {
 
         switch(moonPhase) {
             case "New Moon": (() => {
-                const ratio = calcRatio(data[0].date, data[1].date);
                 fill(255,245,200);
-                ellipse(windowWidth/2, windowHeight/2, 500);
+                arc(windowWidth/2, windowHeight/2, 500, 500, -HALF_PI, HALF_PI);
                 fill(40);
+                ratio = calcRatio(data[0].date, data[1].date, ratio);
                 arc(windowWidth/2, windowHeight/2, 500, 500, HALF_PI, HALF_PI + PI);
-                arc(windowWidth/2, windowHeight/2, (500 - (500 / ratio)), 500, HALF_PI + PI, HALF_PI);
+                arc(windowWidth/2, windowHeight/2, (500 - (ratio / 500)), 500, HALF_PI + PI, HALF_PI);
+                if((500 - (ratio / 500)) == 0) {
+                    data[0].phase = "First Quarter";
+                    ratio = 0;
+                }
             })();
             break;
 
             case "Full Moon": (() => {
-                arc(windowWidth/2, windowHeight/2, 500*phaseMod, 500, HALF_PI, HALF_PI + PI);
-                arc(windowWidth/2, windowHeight/2, 500, 500, HALF_PI + PI, HALF_PI);
+                
+                fill(40);
+                ellipse(windowWidth/2, windowHeight/2, 500);
+                fill(255,245,200);
+                ratio = calcRatio(data[0].date, data[1].date, ratio);
+                arc(windowWidth/2, windowHeight/2, 500, 500, HALF_PI, HALF_PI + PI);
+                arc(windowWidth/2, windowHeight/2, (500 - (ratio / 500)), 500, HALF_PI + PI, HALF_PI);
+                if((500 - (ratio / 500)) == 0) {
+                    data[0].phase = "Last Quarter";
+                    ratio = 0;
+                }
             })();
             break;
 
             case "First Quarter": (() => {
-                arc(windowWidth/2, windowHeight/2, 500*phaseMod, 500, HALF_PI, HALF_PI + PI);
+                fill(40);
+                arc(windowWidth/2, windowHeight/2, 500, 500, HALF_PI, -HALF_PI);
+                fill(255,245,200);
+                ratio = calcRatio(data[0].date, data[1].date, ratio);
+                arc(windowWidth/2, windowHeight/2, (0 + (ratio / 500)), 500, HALF_PI, HALF_PI + PI);
+                fill(255,245,200);
                 arc(windowWidth/2, windowHeight/2, 500, 500, HALF_PI + PI, HALF_PI);
+                if((500 - (ratio / 500)) == 0) {
+                    data[0].phase = "Full Moon";
+                    ratio = 0;
+                }
             })();
             break;
 
             case "Last Quarter": (() => {
-                arc(windowWidth/2, windowHeight/2, 500*phaseMod, 500, HALF_PI, HALF_PI + PI);
+                fill(255,245,200);
+                arc(windowWidth/2, windowHeight/2, 500, 500, HALF_PI, -HALF_PI);
+                fill(40);
+                ratio = calcRatio(data[0].date, data[1].date, ratio);
+                arc(windowWidth/2, windowHeight/2, (0 + (ratio / 500)), 500, HALF_PI, HALF_PI + PI);
                 arc(windowWidth/2, windowHeight/2, 500, 500, HALF_PI + PI, HALF_PI);
+                if((500 - (ratio / 500)) == 0) {
+                    data[0].phase = "New Moon";
+                    ratio = 0;
+                }
             })();
             break;
         }
@@ -46,14 +77,14 @@ function drawLunarPhase(data) {
     }
 }
 
-function calcRatio(currentDate, endDate) {
-    let temp = currentDate.split(" ");
-    currentDate = temp[2];
-    temp = endDate.split(" ");
-    endDate = temp[2];
+function calcRatio(currentDate, endDate, ratio) {
+    // let temp = currentDate.split(" ");
+    // currentDate = temp[2];
+    // temp = endDate.split(" ");
+    // endDate = temp[2];
 
-    const ratio = (((endDate - currentDate) + getTimeProgress()) / 7.5);
-    return ratio;
+    // const ratio = (((endDate - currentDate) + getTimeProgress()) / 7.5);
+    return ratio + 10000;
 }
 
 function calculateDayDifferenceFromCurrentDate(date) {
