@@ -29,7 +29,7 @@ function draw() {
   drawSun();
   drawLunarPhase(lunarPhaseData);
   drawSolarEclipse(solarEclipseData);
-  drawMeteorShower();
+  drawMeteorShower(meteors);
   drawTide();
   meteors = updateMeteors(meteors,windowWidth);
 }
