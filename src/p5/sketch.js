@@ -6,7 +6,7 @@ const updateData = async () => {
     solarEclipseData = await getSolarEclipses();
     daysUntilEclipse = calculateDaysUntilEclipse(solarEclipseData);
     lunarPhaseData = await getLunarPhases();
-    tideData = await getTideData();
+    //tideData = await getTideData();
     //asteroidsData = await getAsteroids();
 }
 setInterval(updateData, 60*60*24*1000);
@@ -26,7 +26,7 @@ function draw() {
   drawStars(stars);
   drawSun();
   drawLunarPhase(lunarPhaseData);
-  drawTide(tideData);
+  drawTide();
   drawSolarEclipse(solarEclipseData);
   drawMeteorShower();
 }
