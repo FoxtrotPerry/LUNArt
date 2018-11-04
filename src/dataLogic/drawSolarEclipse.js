@@ -2,7 +2,7 @@
 function drawSolarEclipse(data) {
     if (data) {
         if (testing) {
-            daysUntilEclipse-=0.1;
+            daysUntilEclipse-=0.01;
         }
         if (Math.abs(daysUntilEclipse+1) < 10) {
             tint(255, 255-(Math.abs(daysUntilEclipse)*17));

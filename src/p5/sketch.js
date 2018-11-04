@@ -1,4 +1,4 @@
-let solarEclipseData, lunarPhaseData, asteroidsData, daysUntilEclipse, solarEclipseImg, testing = false;
+let solarEclipseData, lunarPhaseData, asteroidsData, daysUntilEclipse, solarEclipseImg, testing = false, daysUntilPhaseEnd;
 
 daysUntilEclipse = 50;
 
@@ -6,6 +6,7 @@ const updateData = async () => {
     solarEclipseData = await getSolarEclipses();
     daysUntilEclipse = calculateDaysUntilEclipse(solarEclipseData);
     lunarPhaseData = await getLunarPhases();
+    daysUntilPhaseEnd = calculateDaysUntilPhaseEnd(lunarPhaseData[1].date);
     //asteroidsData = await getAsteroids();
 }
 setInterval(updateData, 60*60*24*1000);

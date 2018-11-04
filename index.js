@@ -11,6 +11,6 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/src/index.html');
 })
 
-server.listen(443, () => {
-    console.log('running on 443')
+server.listen(3000, () => {
+    console.log('running on 3000')
 });

@@ -3,6 +3,8 @@ let phaseMod = 0;
 function drawLunarPhase(data) {
     if(data) {
         let moonPhase = data[0].phase;
+        let phaseEndDate = data[1].date;
+        console.log(daysUntilPhaseEnd);
         switch(moonPhase) {
             case "New Moon": (function() {
                 noStroke();
@@ -46,4 +48,14 @@ function drawLunarPhase(data) {
           phaseMod=0;
         }
     }
+}
+
+function calculateDaysUntilPhaseEnd(date) {
+    const dateData = date.split(" ");
+    const momentPhaseEnd = moment().year(dateData[0]).month(dateData[1]).date(dateData[2]);
+    const currentDate = moment();
+
+    const daysUntilPhaseEnd = Math.abs(Math.floor(moment.duration(momentPhaseEnd.diff(currentDate)).asDays()));
+
+    return Math.abs(daysUntilPhaseEnd);
 }
