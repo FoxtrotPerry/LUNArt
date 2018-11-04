@@ -12,11 +12,11 @@ function drawLunarPhase(data) {
         switch(moonPhase) {
             case "New Moon": (() => {
                 const ratio = calcRatio(data[0].date, data[1].date);
-                fill(40);
-                ellipse(windowWidth/2, windowHeight/2, 500);
                 fill(255,245,200);
+                ellipse(windowWidth/2, windowHeight/2, 500);
+                fill(40);
                 arc(windowWidth/2, windowHeight/2, 500, 500, HALF_PI, HALF_PI + PI);
-                arc(windowWidth/2, windowHeight/2, (500 - (500 * ratio)), 500, HALF_PI + PI, HALF_PI);
+                arc(windowWidth/2, windowHeight/2, (500 - (500 / ratio)), 500, HALF_PI + PI, HALF_PI);
             })();
             break;
 
