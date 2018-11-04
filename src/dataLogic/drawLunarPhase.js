@@ -84,7 +84,7 @@ function calcRatio(currentDate, endDate, ratio) {
     // endDate = temp[2];
 
     // const ratio = (((endDate - currentDate) + getTimeProgress()) / 7.5);
-    return ratio + 10000;
+    return ratio + 100;
 }
 
 function calculateDayDifferenceFromCurrentDate(date) {

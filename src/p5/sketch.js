@@ -6,6 +6,7 @@ const updateData = async () => {
     solarEclipseData = await getSolarEclipses();
     daysUntilEclipse = calculateDaysUntilEclipse(solarEclipseData);
     lunarPhaseData = await getLunarPhases();
+    //tideData = await getTideData();
     //asteroidsData = await getAsteroids();
 }
 setInterval(updateData, 60*60*24*1000);
@@ -27,6 +28,7 @@ function draw() {
   drawMeteorShower(meteors);
   drawSun();
   drawLunarPhase(lunarPhaseData);
+  drawTide();
   drawSolarEclipse(solarEclipseData);
   meteors = updateMeteors(meteors,windowWidth);
 }
@@ -39,6 +41,9 @@ function keyTyped() {
     case '2': (() => {
       daysUntilEclipse = calculateDaysUntilEclipse(solarEclipseData);
     })();
+    break;
+
+    case '3': testingTide = !testingTide;
     break;
   }
 }
