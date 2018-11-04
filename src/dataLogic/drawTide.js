@@ -5,11 +5,11 @@ testingTide = false;
 
 function drawTide(data) {
     if(testingTide){
-        min = 500;
-        max = 550;
+        min = 600;
+        max = 650;
     } else {
-        min = 700;
-        max = 800;
+        min = 800;
+        max = 900;
     }
     fill(155, 155, 255, 100);
     beginShape();

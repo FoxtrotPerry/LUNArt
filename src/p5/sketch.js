@@ -26,9 +26,9 @@ function draw() {
   drawStars(stars);
   drawSun();
   drawLunarPhase(lunarPhaseData);
-  drawTide();
   drawSolarEclipse(solarEclipseData);
   drawMeteorShower();
+  drawTide();
 }
 
 function keyTyped() {
