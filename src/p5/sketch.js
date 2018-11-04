@@ -1,4 +1,4 @@
-let solarEclipseData, lunarPhaseData, asteroidsData, daysUntilEclipse, solarEclipseImg, testing = false, daysUntilPhaseEnd;
+let solarEclipseData, lunarPhaseData, asteroidsData, daysUntilEclipse, solarEclipseImg, stars, testing = false, daysUntilPhaseEnd;
 
 daysUntilEclipse = 50;
 
@@ -11,6 +11,7 @@ const updateData = async () => {
 setInterval(updateData, 60*60*24*1000);
 
 async function preload() {
+  stars = generateStars();
   updateData();
   solarEclipseImg = loadImage("assets/solar-eclipse.png");
 }
@@ -21,10 +22,11 @@ function setup() {
 
 function draw() {
   background(0, 5, 60);
+  drawStars(stars);
   drawSun();
   drawLunarPhase(lunarPhaseData);
   drawSolarEclipse(solarEclipseData);
-  drawAsteroids(asteroidsData);
+  drawMeteorShower();
 }
 
 function keyTyped() {
