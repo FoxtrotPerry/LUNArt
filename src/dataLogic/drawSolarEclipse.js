@@ -1,3 +1,12 @@
+const eclipse = {x: 30, y: 50};
+
 function drawSolarEclipse(data) {
-    // p5 logic
+    //Eclipse
+    if (data) {
+        const currentDay = new Date().getDay();
+        const dayDifference = Math.abs(data.day-currentDay);
+        image(solarEclipseImg, eclipse.x, eclipse.y, 0);
+    }
+
+    //Sun
 }

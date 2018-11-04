@@ -1,0 +1,23 @@
+{
+  "name": "mvh",
+  "version": "1.0.0",
+  "description": "What does it do?\r ------",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FoxtrotPerry/MVH.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FoxtrotPerry/MVH/issues"
+  },
+  "homepage": "https://github.com/FoxtrotPerry/MVH#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "http": "0.0.0"
+  }
+}

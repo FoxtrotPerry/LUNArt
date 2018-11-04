@@ -1,9 +1,10 @@
+let solarEclipseImg;
 let solarEclipseData, lunarPhaseData, asteroidsData;
 let tick = 0;
 
 const updateData = async() => {
   if (tick % 60 === 0) {
-    solarData = await getSolarEclipses();
+    solarEclipseData = await getSolarEclipses();
     lunarPhaseData = await getLunarPhases();
     //asteroidsData = await getAsteroids();
   }
@@ -11,6 +12,7 @@ const updateData = async() => {
 
 async function preload() {
   updateData();
+  solarEclipseImg = loadImage("assets/solar-eclipse.png");
 }
 
 function setup() {
@@ -19,9 +21,9 @@ function setup() {
 
 function draw() {
   tick++;
-  background(0,5,60);
+  background(0, 5, 60);
+  drawLunarPhase(lunarPhaseData);
   drawSolarEclipse(solarEclipseData);
- // drawLunarPhase(lunarPhaseData);
   drawAsteroids(asteroidsData);
   updateData();
 }
