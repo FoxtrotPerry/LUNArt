@@ -4,40 +4,28 @@ function drawLunarPhase(data) {
     if(data) {
         const moonPhase = data[0].phase;
         const progress = getTimeProgress();
+        noStroke();
+        fill(40);
+        ellipse(windowWidth/2, windowHeight/2, 500);
+        fill(255,245,200);
 
         switch(moonPhase) {
-            case "New Moon": (function() {
-                noStroke();
-                fill(40);
-                ellipse(windowWidth/2, windowHeight/2, 500);
-                fill(255,245,200);
+            case "New Moon": (() => {
                 arc(windowWidth/2, windowHeight/2, 500*phaseMod, 500,HALF_PI,HALF_PI+PI);
                 arc(windowWidth/2, windowHeight/2, 500, 500, HALF_PI+PI,HALF_PI);
             })();
             
-            case "Full Moon": (function() {
-                noStroke();
-                fill(40);
-                ellipse(windowWidth/2, windowHeight/2, 500);
-                fill(255,245,200);
+            case "Full Moon": (() => {
                 arc(windowWidth/2, windowHeight/2, 500*phaseMod, 500,HALF_PI,HALF_PI+PI);
                 arc(windowWidth/2, windowHeight/2, 500, 500, HALF_PI+PI,HALF_PI);
             })();
 
-            case "First Quarter": (function() {
-                noStroke();
-                fill(40);
-                ellipse(windowWidth/2, windowHeight/2, 500);
-                fill(255,245,200);
+            case "First Quarter": (() => {
                 arc(windowWidth/2, windowHeight/2, 500*phaseMod, 500,HALF_PI,HALF_PI+PI);
                 arc(windowWidth/2, windowHeight/2, 500, 500, HALF_PI+PI,HALF_PI);
             })();
 
-            case "Last Quarter": (function() {
-                noStroke();
-                fill(40);
-                ellipse(windowWidth/2, windowHeight/2, 500);
-                fill(255,245,200);
+            case "Last Quarter": (() => {
                 arc(windowWidth/2, windowHeight/2, 500*phaseMod, 500,HALF_PI,HALF_PI+PI);
                 arc(windowWidth/2, windowHeight/2, 500, 500, HALF_PI+PI,HALF_PI);
             })();
