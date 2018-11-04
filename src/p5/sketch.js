@@ -1,14 +1,12 @@
-let solarEclipseImg;
-let solarEclipseData, lunarPhaseData, asteroidsData;
-let tick = 0;
+let solarEclipseData, lunarPhaseData, asteroidsData, daysUntilEclipse, solarEclipseImg;
 
-const updateData = async() => {
-  if (tick % 60 === 0) {
+const updateData = async () => {
     solarEclipseData = await getSolarEclipses();
+    daysUntilEclipse = calculateDaysUntilEclipse(solarEclipseData);
     lunarPhaseData = await getLunarPhases();
     //asteroidsData = await getAsteroids();
-  }
 }
+setInterval(updateData, 60*60*24*1000);
 
 async function preload() {
   updateData();
@@ -20,10 +18,9 @@ function setup() {
 }
 
 function draw() {
-  tick++;
   background(0, 5, 60);
   drawSolarEclipse(solarEclipseData);
   drawLunarPhase(lunarPhaseData);
   drawAsteroids(asteroidsData);
-  updateData();
 }
+
