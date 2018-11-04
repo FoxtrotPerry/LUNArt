@@ -2,11 +2,12 @@
 function drawSolarEclipse(data) {
     if (data) {
         if (testing) {
-            daysUntilEclipse-=0.2;
+            daysUntilEclipse-=0.1;
         }
         if (Math.abs(daysUntilEclipse+1) < 10) {
             tint(255, 255-(Math.abs(daysUntilEclipse)*17));
-            image(solarEclipseImg, (windowWidth/2)-450, 50, 0);
+            imageMode(CENTER);
+            image(solarEclipseImg, (windowWidth/2), (windowHeight/2)+5, 0);
         }
     }
 }
