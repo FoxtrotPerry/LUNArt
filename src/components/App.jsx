@@ -1,4 +1,5 @@
-import React from "react";
+import React from "react"
+import Moon from "./Moon.jsx"
 
 class App extends React.Component {
     constructor() {
@@ -6,14 +7,14 @@ class App extends React.Component {
         this.state = {}
     }
 
-    componentDidMount() {
-        console.log("test");
+    componentDidMount = () => {
+        
     }
 
     render() {
         return(
             <div>
-                <h1>Hello!</h1>
+                <h1><Moon /></h1>
             </div>
         )
     }
