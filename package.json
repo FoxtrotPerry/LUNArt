@@ -4,7 +4,7 @@
   "description": "What does it do?\r ------",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open --mode development",
+    "start:dev": "webpack-dev-server --mode development",
     "build": "webpack --mode production"
   },
   "repository": {
