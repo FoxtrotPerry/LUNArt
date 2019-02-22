@@ -1,8 +1,13 @@
+import { randomBytes } from "crypto";
+
 export default function sketch (p) {
-    let rotation = 0;
+    let x = 0;
+    let y = 0;
   
     p.setup = function () {
-      p.createCanvas(600, 400, p.WEBGL);
+      p.createCanvas(p.windowWidth, p.windowHeight);
+      x = p.width / 2;
+      y = p.height
     };
   
     p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
@@ -10,13 +15,13 @@ export default function sketch (p) {
         rotation = props.rotation * Math.PI / 180;
       }
     };
-  
+
     p.draw = function () {
-      p.background(100);
-      p.noStroke();
-      p.push();
-      p.rotateY(rotation);
-      p.box(100);
-      p.pop();
+      p.background(200);
+      p.stroke(50);
+      p.fill(100);
+      p.ellipse(x, y, 24, 24);
+      x = x + p.random(-2, 2);
+      y = y - 1;
     };
   };

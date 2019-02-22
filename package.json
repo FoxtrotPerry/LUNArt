@@ -18,10 +18,10 @@
   },
   "homepage": "https://github.com/FoxtrotPerry/MVH#readme",
   "dependencies": {
+    "eslint": "^5.12.1",
     "p5": "^0.7.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-p5-wrapper": "0.0.4",
     "webpack-cli": "^3.2.1"
   },
   "devDependencies": {
