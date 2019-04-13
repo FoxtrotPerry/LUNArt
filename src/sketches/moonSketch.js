@@ -1,6 +1,6 @@
 var moment = require('moment');
 
-export default function sketch (p) {
+export default function sketch(p) {
     let x = 0;
     let y = 0;
     let phaseMod = 0;
@@ -11,21 +11,30 @@ export default function sketch (p) {
   
     const getTimeProgress = () => 100-(moment.duration(moment().endOf('day').diff(moment())).asHours()/24*100);
 
-    const calcRatio = (ratio) => ratio + 100; 
+    function calcRatio(currentDate, endDate, ratio) {
+      // let temp = currentDate.split(" ");
+      // currentDate = temp[2];
+      // temp = endDate.split(" ");
+      // endDate = temp[2];
 
-    p.setup = function () {
+      // const ratio = (((endDate - currentDate) + getTimeProgress()) / 7.5);
+
+      return ratio + 100;
+    }
+
+    p.setup = function() {
       p.createCanvas(p.windowWidth, p.windowHeight);
       x = p.width / 2;
       y = p.height
     };
   
-    p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
+    p.myCustomRedrawAccordingToNewPropsHandler = function(props) {
       if (props.data){
         p.draw(props.data);
       }
     };
 
-    p.draw = function (data) {
+    p.draw = function(data) {
       if(data) {
         const moonPhase = data[0].phase;
         const progress = getTimeProgress();
@@ -92,6 +101,7 @@ export default function sketch (p) {
         }
 
           phaseMod += .001;
+          
           if(phaseMod>=1.0){
           phaseMod=0;
         }
