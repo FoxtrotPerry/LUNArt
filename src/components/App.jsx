@@ -1,5 +1,6 @@
 import React from "react"
 import Moon from "./Moon.jsx"
+import Wave from "./Wave.jsx"
 
 class App extends React.Component {
     constructor() {
@@ -7,14 +8,11 @@ class App extends React.Component {
         this.state = {}
     }
 
-    componentDidMount = () => {
-        
-    }
-
     render() {
-        return(
+        return (
             <div>
                 <Moon />
+                <Wave />
             </div>
         )
     }

@@ -1,8 +1,9 @@
 import React from 'react'
-import moonSketch from '../sketches/moonSketch.js'
+import moment from 'moment'
+import waveSketch from '../sketches/waveSketch.js'
 import P5Wrapper from "../components/P5Wrapper.jsx"
 
-class Moon extends React.Component {
+class Wave extends React.Component {
     constructor(props) {
         super(props);
 
@@ -14,20 +15,18 @@ class Moon extends React.Component {
     }
 
     componentDidMount() {
-        const currentYear = new Date().getFullYear();
-        const currentDay = new Date().getDate();
-        const currentMonth = new Date().getMonth() + 1;
-        const date = currentMonth + '/' + currentDay + '/' + currentYear;
+        const date = moment().format('YYYYMMDD');
+        const date2 = moment().add(1, 'days').format('YYYYMMDD');
 
-        fetch(`http://api.usno.navy.mil/moon/phase?date=${date}&nump=2`)
+        fetch(`https://tidesandcurrents.noaa.gov/api/datagetter?product=predictions&application=NOS.COOPS.TAC.WL&begin_date=${date}&end_date=${date2}&datum=MLLW&station=8518995&time_zone=lst_ldt&units=english&interval=hilo&format=json`)
             .then(res => res.json())
             .then(
                 (result) => {
                     this.setState({
                         isLoaded: true,
-                        data: result.phasedata,
+                        data: result.predictions,
                     });
-                    console.log('Fetching Moon Phase Data - SUCCESS');
+                    console.log('Fetching Wave Data - SUCCESS');
                     console.log(this.state.data);
                 },
 
@@ -51,10 +50,10 @@ class Moon extends React.Component {
             );
         } else {
             return (
-                <P5Wrapper sketch={moonSketch} data={this.state.data} />
+                <P5Wrapper sketch={waveSketch} data={this.state.data} />
             );
         }
     }
 }
 
-export default Moon;
+export default Wave;
