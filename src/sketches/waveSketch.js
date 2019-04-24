@@ -14,7 +14,7 @@ export default function sketch(p) {
     };
 
     p.draw = function (data) {
-
+        p.clear()
         p.fill(0, 0, 255);
         // We are going to draw a polygon out of the wave points
         p.beginShape();
