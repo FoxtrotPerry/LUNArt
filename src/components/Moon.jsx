@@ -6,34 +6,25 @@ class Moon extends React.Component {
     constructor(props) {
         super(props);
 
+        this.getData = this.getData.bind(this);
+        this.getDate = this.getDate.bind(this);
+
         this.state = {
             error: null,
             data: null,
             isLoading: false,
-            timer: new Date(),
         };
-    }
+    };
 
     componentDidMount() {
-        this.timerID = setInterval(
-            () => this.tick(),
-            1000
-        );
-
-        this.setState({ isLoading: true })
+        this.setState({ isLoading: true });
         this.getData();
-
-    }
+        setInterval(this.getData, 600000);
+    };
 
     componentWillUnmount() {
-        clearInterval(this.timerID);
-    }
-
-    tick() {
-        this.setState({
-            timer: new Date()
-        });
-    }
+        clearInterval(this.getData);
+    };
 
     getData() {
         const date = this.getDate();
@@ -63,7 +54,7 @@ class Moon extends React.Component {
                     });
                 }
             )
-    }
+    };
 
     getDate() {
         const currentYear = new Date().getFullYear();
@@ -72,7 +63,7 @@ class Moon extends React.Component {
         const date = currentMonth + '/' + currentDay + '/' + currentYear;
 
         return date;
-    }
+    };
 
     render() {
         if (this.state.error) {
@@ -88,7 +79,7 @@ class Moon extends React.Component {
                 <P5Wrapper sketch={moonSketch} data={this.state.data} />
             );
         }
-    }
+    };
 }
 
 export default Moon;
