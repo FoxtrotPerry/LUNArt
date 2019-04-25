@@ -3,6 +3,7 @@ import waveSketch from '../sketches/waveSketch.js';
 import P5Wrapper from '../components/P5Wrapper.jsx';
 
 import moment from 'moment';
+import _ from 'lodash';
 
 class Wave extends React.Component {
     constructor(props) {
