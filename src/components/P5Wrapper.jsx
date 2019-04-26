@@ -1,5 +1,6 @@
 import React from 'react'
 import p5 from 'p5'
+import '../../public/style.css'
 
 export default class P5Wrapper extends React.Component {
     componentDidMount() {
