@@ -1,3 +1,8 @@
+body {
+    overflow: hidden;
+    margin: 0 auto;
+}
+
 canvas {
-    position: absolute; 
+    position: absolute;
 } 
