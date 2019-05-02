@@ -15,7 +15,6 @@ class App extends React.Component {
         return (
             <div>
                 <Wave />
-                <Meteors />
                 <Sky />
                 <Moon />
                 <Wave />
