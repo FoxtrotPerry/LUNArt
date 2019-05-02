@@ -45,8 +45,7 @@ class Wave extends React.Component {
                             data: result.predictions,
                             isLoading: false
                         });
-                        console.log('Fetching Moon Phase Data - SUCCESS');
-                        console.log(this.state.data);
+                        console.log('Fetching Wave Data - SUCCESS');
                     }
                 },
 

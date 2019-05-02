@@ -6,6 +6,7 @@ export default function sketch(p) {
       phaseMod = 0;
 
   var ratio = 0;
+  var data;
 
   const getTimeProgress = () => 100 - (moment.duration(moment().endOf('day').diff(moment())).asHours() / 24 * 100);
 
@@ -15,9 +16,9 @@ export default function sketch(p) {
     // temp = endDate.split(" ");
     // endDate = temp[2];
 
-    // const ratio = (((endDate - currentDate) + getTimeProgress()) / 7.5);
+    // ratio = (((endDate - currentDate) + getTimeProgress()) / 7.5);
 
-    return ratio + 100;
+    return ratio + 500;
   }
 
   p.setup = function () {
@@ -26,11 +27,11 @@ export default function sketch(p) {
 
   p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
     if (props.data) {
-      p.draw(props.data);
+      data = props.data;
     }
   };
 
-  p.draw = function (data) {
+  p.draw = function () {
     if (data) {
       const moonPhase = data[0].phase;
       const progress = getTimeProgress();
@@ -42,7 +43,7 @@ export default function sketch(p) {
           p.arc(p.windowWidth / 2, p.windowHeight / 2, 500, 500, -p.HALF_PI, p.HALF_PI);
           p.fill(40);
           ratio = calcRatio(data[0].date, data[1].date, ratio);
-          p.arc(p.windowWidth / 2, p.windowHeight / 2, 500, 500, p.HALF_PI, p.HALF_PI + PI);
+          p.arc(p.windowWidth / 2, p.windowHeight / 2, 500, 500, p.HALF_PI, p.HALF_PI + p.PI);
           p.arc(p.windowWidth / 2, p.windowHeight / 2, (500 - (ratio / 500)), 500, p.HALF_PI + p.PI, p.HALF_PI);
           if ((500 - (ratio / 500)) == 0) {
             data[0].phase = "First Quarter";

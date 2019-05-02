@@ -13,6 +13,7 @@ class Moon extends React.Component {
             error: null,
             data: null,
             isLoading: false,
+            debug: false,
         };
     };
 
@@ -43,7 +44,6 @@ class Moon extends React.Component {
                             isLoading: false
                         });
                         console.log('Fetching Moon Phase Data - SUCCESS');
-                        console.log(this.state.data);
                     }
                 },
 
@@ -73,6 +73,10 @@ class Moon extends React.Component {
         } else if (this.state.isLoading) {
             return (
                 <div>Loading...</div>
+            );
+        } else if (this.state.debug) {
+            return (
+                <P5Wrapper sketch={moonSketch} debug={this.state.debug} />
             );
         } else {
             return (
