@@ -37,20 +37,20 @@ class Meteors extends React.Component {
                 (result) => {
                     if(result.error) {
                         this.setState({
-                            error: // JSON ELEM HERE
+                            //error: // JSON ELEM HERE
                         });
                     } else {
                         this.setState({
-                            data: ,// JSON ELEM HERE
+                            // data: // JSON ELEM HERE
                             isLoading: false
                         })
                         console.log('Meteor Data Fetch - SUCCESS');
                     }
-                }
+                },
 
                 (error) => {
                     this.setState({
-                        error: ,// JSON ELEM HERE
+                        // error: ,// JSON ELEM HERE
                         isLoading: false
                     })
                 }
