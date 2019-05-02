@@ -35,7 +35,7 @@ export default function sketch(p) {
                 // let y = map(noise(xoff), 0, 1, 200,300);
 
                 // Set the vertex
-                p.vertex(x, y * 3);
+                p.vertex(x, y * 2);
                 // Increment x dimension for noise
                 xoff += 0.05;
             }
