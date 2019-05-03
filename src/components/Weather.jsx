@@ -15,7 +15,8 @@ class Weather extends React.Component {
             error: null,
             data: null,
             time: null,
-            debug: null,
+            debugWeather: null,
+            debugSky: null,
             isLoading: false,
         };
     };
@@ -76,15 +77,20 @@ class Weather extends React.Component {
     keyboardInput = (e) => {
         const code = e.keyCode;
 
-        if(code == 49) {
-            this.setState({ debug: 'Rain' });
-        } else if (code == 50) {
-            this.setState({ debug: 'Snow' });
-        }  else if (code == 51) {
-            this.setState({ debug: 'Clouds' });
+        if(code == 50) {
+            this.setState({ debugWeather: 'Rain' });
+        } else if (code == 51) {
+            this.setState({ debugWeather: 'Snow' });
+        }  else if (code == 52) {
+            this.setState({ debugWeather: 'Clouds' });
+        } else if (code == 53) {
+            this.setState({ debugSky: true});
         } else {
-            this.setState({ debug: null });
-        }
+            this.setState({ 
+                debugWeather: null,
+                debugSky: false,
+            });
+        } 
     } 
 
     render() {
@@ -99,8 +105,8 @@ class Weather extends React.Component {
         } else {
             return (
                 <div>
-                    <P5Wrapper sketch={skySketch} data={this.state.time}/>
-                    <P5Wrapper sketch={weatherSketch} data={this.state.data} debug={this.state.debug} />
+                    <P5Wrapper sketch={skySketch} data={this.state.time} debug={this.state.debugSky} />
+                    <P5Wrapper sketch={weatherSketch} data={this.state.data} debug={this.state.debugWeather} />
                 </div>
             );
         }

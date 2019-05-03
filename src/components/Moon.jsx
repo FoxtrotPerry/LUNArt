@@ -70,10 +70,8 @@ class Moon extends React.Component {
     keyboardInput = (e) => {
         const code = e.keyCode;
 
-        if (code == 52) {
+        if (code == 49) {
             this.setState({ debug: true });
-        } else {
-            this.setState({ debug: false });
         }
     }
 
