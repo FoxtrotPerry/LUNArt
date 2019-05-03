@@ -63,7 +63,6 @@ export default function sketch(p) {
 
     function renderClouds() {
         for (var j = cloud.length - 1; j >= 0; j--) {
-            cloud[j].show();
             cloud[j].draw();
             cloud[j].checkPos();
             cloud[j].stepPos();
@@ -109,11 +108,6 @@ export default function sketch(p) {
         this.shade = p.random(210,255)
         this.speedMult = p.random(1.25,1.75)
         this.sizeMult = (this.speedMult>1) ? (this.speedMult-Math.abs(this.speedMult-1.5)*2):(this.speedMult+Math.abs(this.speedMult-1.5)*2)
-        this.show = function () {
-            if (this.x > p.width) {
-                this.x = 0;
-            }
-        };
 
         this.draw = function() {
             p.noStroke()
@@ -131,7 +125,7 @@ export default function sketch(p) {
 
         this.checkPos = () => {
             if(this.x > p.windowWidth) {
-                this.x = p.random(-400,-200)
+                this.x = p.random(-p.windowWidth/2,-p.windowWidth)
             }
         }
     }
