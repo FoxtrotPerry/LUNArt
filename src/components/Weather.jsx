@@ -15,11 +15,13 @@ class Weather extends React.Component {
             error: null,
             data: null,
             time: null,
+            debug: null,
             isLoading: false,
         };
     };
 
     componentDidMount() {
+        window.addEventListener('keydown', this.keyboardInput);
         this.setState({ isLoading: true });
         this.getData();
         this.getTime();
@@ -29,6 +31,7 @@ class Weather extends React.Component {
 
     componentWillUnmount() {
         clearInterval(this.getData);
+        window.removeEventListener('keydown', this.keyboardInput);
     };
 
     getData() {
@@ -70,6 +73,20 @@ class Weather extends React.Component {
         this.setState({ time: currentTime });
     }
 
+    keyboardInput = (e) => {
+        const code = e.keyCode;
+
+        if(code == 49) {
+            this.setState({ debug: 'Rain' });
+        } else if (code == 50) {
+            this.setState({ debug: 'Snow' });
+        }  else if (code == 51) {
+            this.setState({ debug: 'Clouds' });
+        } else {
+            this.setState({ debug: null });
+        }
+    } 
+
     render() {
         if (this.state.error) {
             return (
@@ -83,7 +100,7 @@ class Weather extends React.Component {
             return (
                 <div>
                     <P5Wrapper sketch={skySketch} data={this.state.time}/>
-                    <P5Wrapper sketch={weatherSketch} data={this.state.data} />
+                    <P5Wrapper sketch={weatherSketch} data={this.state.data} debug={this.state.debug} />
                 </div>
             );
         }

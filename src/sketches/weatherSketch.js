@@ -3,9 +3,14 @@ export default function sketch(p) {
     var drop = [];
     var cloud = [];
     var data;
+    var debug;
 
     p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
-        if (props.data) {
+        if(props.debug) {
+            debug = props.debug
+            console.log(debug);
+        } else if (props.data) {
+            debug = null;
             data = props.data
         }
     };
@@ -15,13 +20,29 @@ export default function sketch(p) {
         for (var j = 0; j < 500; j++) {
             drop[j] = new Drop();
         }
-        for (j = 0; j < 6; j++) {
+        for (j = 0; j < 20; j++) {
             cloud[j] = new Cloud();
         }
     };
 
     p.draw = function () {
-        if (data) {
+        if (debug != null) {
+            p.clear();
+
+            switch (debug) {
+                case "Rain": renderRain();
+                    break;
+
+                case "Snow": renderSnow();
+                    break;
+
+                case "Clouds": renderClouds();
+                    break;
+
+                default: p.clear();
+                    break;
+            }
+        } else if (data) {
             p.clear();
 
             switch (data) {
@@ -78,7 +99,7 @@ export default function sketch(p) {
             }
         };
         this.fall = function() {
-            this.y = this.y + p.random(1, 3);
+            this.y = this.y + p.random(1, 6);
         };
     }
 

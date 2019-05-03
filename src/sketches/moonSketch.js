@@ -33,6 +33,7 @@ export default function sketch(p) {
 
   p.draw = function () {
     if (data) {
+      p.clear();
       const moonPhase = data[0].phase;
       const progress = getTimeProgress();
       p.noStroke();
