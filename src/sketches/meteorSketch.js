@@ -14,15 +14,14 @@ export default function sketch(p) {
         for (let i = 0; i < meteorAmt; i++) {
             meteorArray[i] = new Meteor();
         }
-        console.log(meteorArray)
     }
 
     p.draw = () => {
         // if (data != undefined) { // left out due to lack of meteor data :c
             p.clear();
             for (let i = 0; i < meteorAmt; i++) {
-
                 meteorArray[i].checkPos()
+                meteorArray[i].drawTrail()
                 meteorArray[i].draw()
                 meteorArray[i].stepPos()
             }
@@ -32,10 +31,9 @@ export default function sketch(p) {
     function Meteor() {
         this.x = p.random(-300, p.windowWidth)
         this.y = p.random(-p.windowHeight*0.5,0)
+        this.trailLength = 20
         this.speedMult = p.random(0.5,1.5)
         this.sizeMult = (this.speedMult>1) ? (this.speedMult-Math.abs(this.speedMult-1)*2):(this.speedMult+Math.abs(this.speedMult-1)*2)
-        this.theta_X = 0.3
-        this.theta_Y = 0.5
 
         this.draw = () => {
             p.noStroke()
@@ -54,6 +52,14 @@ export default function sketch(p) {
             if(this.y > p.windowHeight) {
                 this.y = 0
                 this.x = p.random(-300, p.windowWidth)
+            }
+        }
+
+        this.drawTrail = () => {
+            p.noStroke()
+            for(let i = 0; i < this.trailLength; i++) {
+                p.fill(255,127,0)
+                p.ellipse(this.x-this.theta_X*i,this.y-this.theta_Y*i,5*(Math.abs(i-this.trailLength)/this.trailLength))
             }
         }
     }
