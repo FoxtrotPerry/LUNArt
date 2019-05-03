@@ -2,6 +2,7 @@ import React from "react";
 import sunSketch from "../sketches/sunSketch.js";
 import P5Wrapper from "./P5Wrapper.jsx";
 import eclipseSketch from "../sketches/eclipseSketch.js";
+import { timingSafeEqual } from "crypto";
 
 class Sun extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class Sun extends React.Component {
     this.getNextEclipse = this.getNextEclipse.bind(this);
 
     this.state = {
+      step: null,
       error: null,
       daysUntilEclipse: null,
       isLoading: false,
@@ -20,11 +22,12 @@ class Sun extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ isLoading: true });
+    window.addEventListener('keydown', this.keyboardInput);
+    this.setState({ isLoading: true, step: 0.01 });
     this.getData();
     if (this.state.debug) {
       setInterval(() => {
-        this.setState({ daysUntilEclipse: this.state.daysUntilEclipse - 0.01})
+        this.setState({ daysUntilEclipse: this.state.daysUntilEclipse - this.state.step})
       }, 5)
     } else {
       setInterval(this.getData, 600 * 1000);
@@ -33,6 +36,20 @@ class Sun extends React.Component {
 
   componentWillMount() {
     clearInterval(this.getData);
+  }
+
+  keyboardInput = (e) => {
+    const {keyCode: code} = e;
+    switch(code) {
+      case 13: this.setState({ daysUntilEclipse: 30, step: 0.01 });
+      break;
+      case 79: this.setState({ step: 0.0001, daysUntilEclipse: 0});
+      break;
+      case 80: this.setState({ step: 0.1 });
+      break;
+      case 73: this.setState({ step: 0.01 });
+      break;
+    }
   }
 
   getData() {
