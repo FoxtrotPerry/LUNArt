@@ -49,6 +49,8 @@ class Sun extends React.Component {
       break;
       case 73: this.setState({ step: 0.01 });
       break;
+      case 85: this.setState({ daysUntilEclipse: 100, step: 0 });
+      break;
     }
   }
 
@@ -59,7 +61,7 @@ class Sun extends React.Component {
       .then(
         result => {
           this.getNextEclipse(result.eclipses_in_year);
-          this.setState({ isLoading: false, daysUntilEclipse: 30 });
+          this.setState({ isLoading: false, daysUntilEclipse: 100, step: 0 });
         },
         error => this.setState({ error, isloading: false })
       );
