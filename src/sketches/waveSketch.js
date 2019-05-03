@@ -17,7 +17,7 @@ export default function sketch(p) {
     p.draw = function () {
         if (data) {
             p.clear();
-            p.fill(0, 47, 100, 150);
+            p.fill(0, 47, 100, 255);
             // We are going to draw a polygon out of the wave points
             p.beginShape();
 

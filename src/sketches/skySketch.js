@@ -39,20 +39,5 @@ export default function sketch(p) {
         p.createCanvas(p.windowWidth, p.windowHeight);
         var x = p.width / 2;
         var y = p.height;
-        p.frameRate(60);
-        skyMap = new Map([
-            [0, "#000000"],
-            [1, "#000000"],
-            [2, "#000000"],
-            [3, "#001219"],
-            [4, "#002433"],
-            [5, "#00364C"],
-            [6, "#006C99"],
-            [7, "#0090CC"],
-            [8, "#007EB2"],
-            [9, "#005A7f"],
-            [10, "#004866"],
-            [11, "#004866"],
-        ]);
     };
 };
