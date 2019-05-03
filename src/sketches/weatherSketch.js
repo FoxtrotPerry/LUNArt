@@ -15,7 +15,7 @@ export default function sketch(p) {
         for (var j = 0; j < 500; j++) {
             drop[j] = new Drop();
         }
-        for (j = 0; j < 10; j++) {
+        for (j = 0; j < 6; j++) {
             cloud[j] = new Cloud();
         }
     };
@@ -43,7 +43,9 @@ export default function sketch(p) {
     function renderClouds() {
         for (var j = cloud.length - 1; j >= 0; j--) {
             cloud[j].show();
-            cloud[j].float();
+            cloud[j].draw();
+            cloud[j].checkPos();
+            cloud[j].stepPos();
         }
     }
 
@@ -81,22 +83,35 @@ export default function sketch(p) {
     }
 
     function Cloud() {
-        this.x = p.random(0, -100);
+        this.x = p.random(-p.windowWidth,p.windowWidth-200)
         this.y = p.random(10, 50);
+        this.shade = p.random(210,255)
+        this.speedMult = p.random(1.25,1.75)
+        this.sizeMult = (this.speedMult>1) ? (this.speedMult-Math.abs(this.speedMult-1.5)*2):(this.speedMult+Math.abs(this.speedMult-1.5)*2)
         this.show = function () {
             if (this.x > p.width) {
                 this.x = 0;
             }
         };
 
-        this.float = function() {
-            this.x = this.x + p.random(1, 2);
-            p.translate(this.x, this.y)
-            p.noStroke();
-            p.ellipse(100, 100, 30);
-            p.ellipse(110, 110, 30);
-            p.ellipse(120, 95, 50, 40);
-            p.ellipse(130, 105, 30);
+        this.draw = function() {
+            p.noStroke()
+            p.fill(this.shade)
+            p.ellipse(this.x+100*this.sizeMult, this.y+70*this.sizeMult, 60*this.sizeMult);
+            p.ellipse(this.x+140*this.sizeMult, this.y+70*this.sizeMult, 70*this.sizeMult);
+            p.ellipse(this.x+170*this.sizeMult, this.y+110*this.sizeMult, 70*this.sizeMult);
+            p.ellipse(this.x+120*this.sizeMult, this.y+110*this.sizeMult, 80*this.sizeMult);
+            p.ellipse(this.x+70*this.sizeMult, this.y+110*this.sizeMult, 75*this.sizeMult);
+        }
+
+        this.stepPos = () => {
+            this.x += this.speedMult
+        }
+
+        this.checkPos = () => {
+            if(this.x > p.windowWidth) {
+                this.x = p.random(-400,-200)
+            }
         }
     }
 }

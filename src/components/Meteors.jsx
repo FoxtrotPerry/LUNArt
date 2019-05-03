@@ -16,6 +16,7 @@ class Meteors extends React.Component {
             error: null,
             data: null,
             isLoading: false,
+            debug: false
         };
     };
 
@@ -30,8 +31,14 @@ class Meteors extends React.Component {
     };
 
     getData() {
-        const dates = this.getDate();
-        fetch(`URL_HERE`)
+
+    /*
+        FETCH URL TAKEN FROM MOON.JSX DUE TO LACK OF METEOR DATA
+
+        IS SIMPLY PLACE HOLDER (notice lack of state change)
+    */
+        const date = this.getDate();
+        fetch(`http://api.usno.navy.mil/moon/phase?date=${date}&nump=2`)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -58,18 +65,19 @@ class Meteors extends React.Component {
     };
 
     getDate() {
-        const dates = {
-            first: moment().format('YYYYMMDD'),
-            second: moment().add(1, 'day').format('YYYYMMDD'),
-        };
+        const currentYear = new Date().getFullYear();
+        const currentDay = new Date().getDate();
+        const currentMonth = new Date().getMonth() + 1;
+        const date = currentMonth + '/' + currentDay + '/' + currentYear;
 
-        return dates;
-    }
+        return date;
+    };
+    
 
     render() {
         if(this.state.error) {
             return (
-                <div>ERROR: JSON ELEM HERE</div>
+                <div>ERROR: {this.state.error}</div>
             );
         } else if (this.state.isLoading) {
             return (
@@ -82,5 +90,6 @@ class Meteors extends React.Component {
         }
     }
 }
+
 
 export default Meteors;
