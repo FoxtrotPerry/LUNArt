@@ -2,7 +2,7 @@ var moment = require('moment');
 
 export default function sketch(p) {
   let x = 0,
-      y = 0,
+      y = -500,
       phaseMod = 0;
 
   var ratio = 0;
@@ -33,6 +33,7 @@ export default function sketch(p) {
 
   p.draw = function () {
     if (data) {
+      p.clear();
       const moonPhase = data[0].phase;
       const progress = getTimeProgress();
       p.noStroke();
@@ -58,7 +59,7 @@ export default function sketch(p) {
           p.ellipse(p.windowWidth / 2, p.windowHeight / 2, 500);
           p.fill(255, 245, 200);
           ratio = calcRatio(data[0].date, data[1].date, ratio);
-          p.arc(p.windowWidth / 2, p.windowHeight / 2, 500, 500, p.HALF_PI, p.HALF_PI + p.PI);
+          p.arc(p.windowWidth / 2, (p.windowHeight / 2), 500, 500, p.HALF_PI, p.HALF_PI + p.PI);
           p.arc(p.windowWidth / 2, p.windowHeight / 2, (500 - (ratio / 500)), 500, p.HALF_PI + p.PI, p.HALF_PI);
           if ((500 - (ratio / 500)) == 0) {
             data[0].phase = "Last Quarter";
