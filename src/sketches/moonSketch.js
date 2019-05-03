@@ -2,24 +2,28 @@ var moment = require('moment');
 
 export default function sketch(p) {
   let x = 0,
-      y = 0,
-      phaseMod = 0;
+    y = 0,
+    phaseMod = 0;
 
   var ratio = 0;
   var data;
+  var debug;
 
   const getTimeProgress = () => 100 - (moment.duration(moment().endOf('day').diff(moment())).asHours() / 24 * 100);
 
   function calcRatio(currentDate, endDate, ratio) {
-    // let temp = currentDate.split(" ");
-    // currentDate = temp[2];
-    // temp = endDate.split(" ");
-    // endDate = temp[2];
+    // if (debug == false) {
+    //   let temp = currentDate.split(" ");
+    //   currentDate = temp[2];
+    //   temp = endDate.split(" ");
+    //   endDate = temp[2];
 
-    // ratio = (((endDate - currentDate) + getTimeProgress()) / 7.5);
-
-    return ratio + 500;
-  }
+    //   ratio = (((endDate - currentDate) + getTimeProgress()) / 7.5);
+    //   return ratio;
+    // } else {
+      return ratio + 500;
+    //}
+  };
 
   p.setup = function () {
     p.createCanvas(p.windowWidth, p.windowHeight);
@@ -28,6 +32,7 @@ export default function sketch(p) {
   p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
     if (props.data) {
       data = props.data;
+      debug = props.debug;
     }
   };
 
