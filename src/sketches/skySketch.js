@@ -8,44 +8,19 @@ export default function sketch(p) {
         }
     };
 
-    p.setup = function () {
-        p.createCanvas(p.windowWidth, p.windowHeight);
-        var x = p.width / 2;
-        var y = p.height;
-        // skyMap = new Map([
-        //     [1,],
-        //     [2,],
-        //     [3,],
-        //     [4,],
-        //     [5,],
-        //     [6,],
-        //     [7,],
-        //     [8,],
-        //     [9,],
-        //     [10,],
-        //     [11,],
-        //     [12,],
-        //     [13,],
-        //     [14,],
-        //     [15,],
-        //     [16,],
-        //     [17,],
-        //     [18,],
-        //     [19,],
-        //     [20,],
-        //     [21,],
-        //     [22,],
-        //     [23,],
-        //     [24,]
-        // ]);
-    };
-
     p.draw = function () {
-        if (data) {
+        if (data != undefined) {
             p.clear();
-            var c1 = p.color(204, 102, 0);
-            var c2 = p.color(50, 102, 153);
-            setGradient(0, 0, 2000, 1000, c2, c1);
+
+            const c1 = p.color('#00B5FF'); // Blue
+            const c2 = p.color("#000000"); // Black
+
+            let lerpAmount = (data <= 11 ? data / 11 : (23-data) / 11);
+            lerpAmount = lerpAmount > 1 ? "100" : lerpAmount*100;
+            lerpAmount = lerpAmount <= 0 ? "1" : lerpAmount;
+            const backgroundColor = p.color(`hsl(210, 30%, ${lerpAmount}%)`);//p.lerpColor(c1, c2, lerpAmount);
+            p.background(backgroundColor);
+            // setGradient(0, 0, 2000, 1000, c2, c1);
         }
     };
 
@@ -59,4 +34,25 @@ export default function sketch(p) {
                 p.line(x, i, x + w, i);
         }
     }
+
+    p.setup = function () {
+        p.createCanvas(p.windowWidth, p.windowHeight);
+        var x = p.width / 2;
+        var y = p.height;
+        p.frameRate(60);
+        skyMap = new Map([
+            [0, "#000000"],
+            [1, "#000000"],
+            [2, "#000000"],
+            [3, "#001219"],
+            [4, "#002433"],
+            [5, "#00364C"],
+            [6, "#006C99"],
+            [7, "#0090CC"],
+            [8, "#007EB2"],
+            [9, "#005A7f"],
+            [10, "#004866"],
+            [11, "#004866"],
+        ]);
+    };
 };

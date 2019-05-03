@@ -22,7 +22,7 @@ class Wave extends React.Component {
     componentDidMount() {
         this.setState({ isLoading: true });
         this.getData();
-        setInterval(this.getData, 600000);
+        setInterval(this.getData, 60000);
     };
 
     componentWillUnmount() {
@@ -38,7 +38,12 @@ class Wave extends React.Component {
     };
 
     getTime() {
-        const time = moment().hour();
+        const hour = moment().hour();
+        const minute = moment().minute();
+
+        const decimal = minute / 60;
+        const time = hour + decimal;
+
         return time;
     };
 
