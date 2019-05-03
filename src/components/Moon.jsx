@@ -18,6 +18,7 @@ class Moon extends React.Component {
     };
 
     componentDidMount() {
+        window.addEventListener('keydown', this.keyboardInput);
         this.setState({ isLoading: true });
         this.getData();
         setInterval(this.getData, 600000);
@@ -25,6 +26,7 @@ class Moon extends React.Component {
 
     componentWillUnmount() {
         clearInterval(this.getData);
+        window.removeEventListener('keydown', this.keyboardInput);
     };
 
     getData() {
@@ -65,6 +67,14 @@ class Moon extends React.Component {
         return date;
     };
 
+    keyboardInput = (e) => {
+        const code = e.keyCode;
+
+        if (code == 49) {
+            this.setState({ debug: true });
+        }
+    }
+
     render() {
         if (this.state.error) {
             return (
@@ -74,13 +84,9 @@ class Moon extends React.Component {
             return (
                 <div>Loading...</div>
             );
-        } else if (this.state.debug) {
-            return (
-                <P5Wrapper sketch={moonSketch} debug={this.state.debug} />
-            );
         } else {
             return (
-                <P5Wrapper sketch={moonSketch} data={this.state.data} />
+                <P5Wrapper sketch={moonSketch} data={this.state.data} debug={this.state.debug} />
             );
         }
     };

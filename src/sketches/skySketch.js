@@ -1,24 +1,34 @@
 export default function sketch(p) {
     var data;
     var skyMap;
+    var debug;
 
     p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
         if (props.data) {
-            data = props.data
+            data = props.data;
+            debug = props.debug;
+        }
+
+        if(debug) {
+            changeFrameRate();
         }
     };
 
     p.draw = function () {
         if (data != undefined) {
             p.clear();
-
-            const c1 = p.color('#00B5FF'); // Blue
-            const c2 = p.color("#000000"); // Black
+            if(debug) {
+                if(data < 24) {
+                    data += .1;
+                } else {
+                    data = 1;
+                }
+            }
 
             let lerpAmount = (data <= 11 ? data / 11 : (23-data) / 11);
-            lerpAmount = lerpAmount > 1 ? "100" : lerpAmount*100;
+            lerpAmount = lerpAmount > 1 ? "65" : lerpAmount*65;
             lerpAmount = lerpAmount <= 0 ? "1" : lerpAmount;
-            const backgroundColor = p.color(`hsl(210, 30%, ${lerpAmount}%)`);//p.lerpColor(c1, c2, lerpAmount);
+            const backgroundColor = p.color(`hsl(210, 50%, ${lerpAmount}%)`);//p.lerpColor(c1, c2, lerpAmount);
             p.background(backgroundColor);
             // setGradient(0, 0, 2000, 1000, c2, c1);
         }
@@ -40,4 +50,12 @@ export default function sketch(p) {
         var x = p.width / 2;
         var y = p.height;
     };
+
+    function changeFrameRate() {
+        if(debug) {
+            p.frameRate(5);
+        } else {
+            p.frameRate(60);
+        }
+    }
 };

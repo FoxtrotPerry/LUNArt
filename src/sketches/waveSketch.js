@@ -17,6 +17,7 @@ export default function sketch(p) {
     p.draw = function () {
         if (data) {
             p.clear();
+            p.noStroke();
             p.fill(0, 47, 100, 255);
             // We are going to draw a polygon out of the wave points
             p.beginShape();
@@ -35,7 +36,7 @@ export default function sketch(p) {
                 // let y = map(noise(xoff), 0, 1, 200,300);
 
                 // Set the vertex
-                p.vertex(x, y * 2);
+                p.vertex(x, y * (data[0].v/3));
                 // Increment x dimension for noise
                 xoff += 0.05;
             }

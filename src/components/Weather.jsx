@@ -15,11 +15,14 @@ class Weather extends React.Component {
             error: null,
             data: null,
             time: null,
+            debugWeather: null,
+            debugSky: null,
             isLoading: false,
         };
     };
 
     componentDidMount() {
+        window.addEventListener('keydown', this.keyboardInput);
         this.setState({ isLoading: true });
         this.getData();
         this.getTime();
@@ -29,6 +32,7 @@ class Weather extends React.Component {
 
     componentWillUnmount() {
         clearInterval(this.getData);
+        window.removeEventListener('keydown', this.keyboardInput);
     };
 
     getData() {
@@ -70,6 +74,25 @@ class Weather extends React.Component {
         this.setState({ time: currentTime });
     }
 
+    keyboardInput = (e) => {
+        const code = e.keyCode;
+
+        if(code == 50) {
+            this.setState({ debugWeather: 'Rain' });
+        } else if (code == 51) {
+            this.setState({ debugWeather: 'Snow' });
+        }  else if (code == 52) {
+            this.setState({ debugWeather: 'Clouds' });
+        } else if (code == 53) {
+            this.setState({ debugSky: true});
+        } else {
+            this.setState({ 
+                debugWeather: null,
+                debugSky: false,
+            });
+        } 
+    } 
+
     render() {
         if (this.state.error) {
             return (
@@ -82,8 +105,8 @@ class Weather extends React.Component {
         } else {
             return (
                 <div>
-                    <P5Wrapper sketch={skySketch} data={this.state.time}/>
-                    <P5Wrapper sketch={weatherSketch} data={this.state.data} />
+                    <P5Wrapper sketch={skySketch} data={this.state.time} debug={this.state.debugSky} />
+                    <P5Wrapper sketch={weatherSketch} data={this.state.data} debug={this.state.debugWeather} />
                 </div>
             );
         }
