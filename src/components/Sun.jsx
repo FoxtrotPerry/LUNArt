@@ -15,14 +15,20 @@ class Sun extends React.Component {
       error: null,
       daysUntilEclipse: null,
       isLoading: false,
-      debug: false
+      debug: true
     };
   }
 
   componentDidMount() {
     this.setState({ isLoading: true });
     this.getData();
-    setInterval(this.getData, 600 * 1000);
+    if (this.state.debug) {
+      setInterval(() => {
+        this.setState({ daysUntilEclipse: this.state.daysUntilEclipse - 0.01})
+      }, 5)
+    } else {
+      setInterval(this.getData, 600 * 1000);
+    }
   }
 
   componentWillMount() {
@@ -36,7 +42,7 @@ class Sun extends React.Component {
       .then(
         result => {
           this.getNextEclipse(result.eclipses_in_year);
-          this.setState({ isLoading: false, daysUntilEclipse: Math.random(0,10)*10 });
+          this.setState({ isLoading: false, daysUntilEclipse: 30 });
         },
         error => this.setState({ error, isloading: false })
       );
@@ -58,8 +64,8 @@ class Sun extends React.Component {
     } else if (this.state.debug) {
       return (
       <div>
-        <P5Wrapper sketch={sunSketch} debug={this.state.debug} />;
-        <P5Wrapper sketch={eclipseSketch} debug={this.state.debug} />;
+        <P5Wrapper sketch={sunSketch} daysUntilEclipse={this.state.daysUntilEclipse} debug={this.state.debug} />;
+        <P5Wrapper sketch={eclipseSketch} daysUntilEclipse={this.state.daysUntilEclipse} debug={this.state.debug} />;
       </div>
       );
     } else {
