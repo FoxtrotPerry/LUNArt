@@ -13,7 +13,6 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <Wave />
                 <Weather />
                 <Moon />
                 <Wave />
