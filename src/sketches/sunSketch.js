@@ -7,6 +7,7 @@ export default function sketch(p) {
     p.draw = function() {
         if (daysUntilEclipse) {
             p.clear();
+            p.noStroke();
             p.fill('yellow');
             p.ellipse((p.windowWidth/2 + daysUntilEclipse*-20), (p.windowHeight/2)+18, 500, 500);
         }

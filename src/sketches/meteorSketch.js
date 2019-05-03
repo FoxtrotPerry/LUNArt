@@ -31,13 +31,15 @@ export default function sketch(p) {
     function Meteor() {
         this.x = p.random(-300, p.windowWidth)
         this.y = p.random(-p.windowHeight*0.5,0)
-        this.trailLength = 20
+        this.trailLength = 30
         this.speedMult = p.random(0.5,1.5)
+        this.theta_X = 0.3
+        this.theta_Y = 0.5
         this.sizeMult = (this.speedMult>1) ? (this.speedMult-Math.abs(this.speedMult-1)*2):(this.speedMult+Math.abs(this.speedMult-1)*2)
 
         this.draw = () => {
             p.noStroke()
-            p.fill(50,50,50);
+            p.fill(50,50,50,50);
             p.ellipse(this.x,this.y,10*this.sizeMult)
             p.fill(200,200,200)
             p.ellipse(this.x,this.y,5*this.sizeMult)
@@ -58,8 +60,8 @@ export default function sketch(p) {
         this.drawTrail = () => {
             p.noStroke()
             for(let i = 0; i < this.trailLength; i++) {
-                p.fill(255,127,0)
-                p.ellipse(this.x-this.theta_X*i,this.y-this.theta_Y*i,5*(Math.abs(i-this.trailLength)/this.trailLength))
+                p.fill(255,127+(128*(i/this.trailLength)),0)
+                p.ellipse(this.x-this.theta_X*i*5,this.y-this.theta_Y*i*5,5*(Math.abs(i-this.trailLength)/this.trailLength))
             }
         }
     }
