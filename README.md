@@ -13,9 +13,8 @@ Current features include:
 * Current Phase
 * State of seasonal meteor showers
 * Solar eclipse tracker
-
-Future features might include:
 * Varying sky color to match current time of day and season
 * Cloud coverage based on day to day forecasts
-* _Rain & snow?_
+* Dynamic weather, showing rain and snow
+_
 * **if you have any ideas open an issue we'd love to hear it**
